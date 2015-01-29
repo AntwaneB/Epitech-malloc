@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 14:09:44 2015 Antoine Buchser
-** Last update Thu Jan 29 14:20:24 2015 Antoine Buchser
+** Last update Thu Jan 29 15:57:03 2015 Antoine Buchser
 */
 
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-  char	*test = malloc(200000000);
+  char	*test = malloc(5);
 
   if (test == NULL)
     {

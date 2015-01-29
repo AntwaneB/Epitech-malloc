@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 12:50:51 2015 Antoine Buchser
-** Last update Thu Jan 29 15:47:42 2015 Antoine Buchser
+** Last update Thu Jan 29 15:58:35 2015 Antoine Buchser
 */
 
 #ifndef MALLOC_H_
@@ -27,7 +27,7 @@ typedef struct	s_blk
   void		*self;
   size_t	size;
   t_bool	free;
-  char		data;
+  char		data[1];
 }		t_blk;
 
 # define BLK_SIZE	sizeof(t_blk)

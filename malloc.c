@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Tue Jan 27 15:23:33 2015 Antoine Buchser
-** Last update Thu Jan 29 15:54:15 2015 Antoine Buchser
+** Last update Thu Jan 29 15:59:22 2015 Antoine Buchser
 */
 
 #include "malloc.h"
@@ -56,5 +56,5 @@ void	*malloc(size_t size)
 
   size = PAGING(size);
   ptr = get_blk_addr(size);
-  return (&(ptr->data));
+  return (ptr->data);
 }
