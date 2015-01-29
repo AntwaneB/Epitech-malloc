@@ -5,11 +5,12 @@
 ## Login   <buchse_a@epitech.net>
 ## 
 ## Started on  Tue Jan 27 15:24:06 2015 Antoine Buchser
-## Last update Tue Jan 27 15:50:18 2015 Antoine Buchser
+## Last update Thu Jan 29 15:51:18 2015 Antoine Buchser
 ##
 
 CC	=	gcc
-CFLAGS	+=	-W -Wall -Wextra -Werror
+CFLAGS	+=	-fPIC -W -Wall -Wextra -Werror
+LDFLAGS	=	-shared
 RM	=	rm -f
 
 SRCS	=	malloc.c
@@ -20,9 +21,8 @@ NAME	=	libmy_malloc_$(HOSTTYPE).so
 
 all:		$(NAME)
 
-$(NAME):
-		$(CC) -c -fPIC $(SRCS)
-		$(CC) -o $(NAME) -shared $(OBJS)
+$(NAME):	$(OBJS)
+		$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 clean:
 		$(RM) $(OBJS)

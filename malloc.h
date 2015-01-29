@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 12:50:51 2015 Antoine Buchser
-** Last update Thu Jan 29 15:27:32 2015 Antoine Buchser
+** Last update Thu Jan 29 15:47:42 2015 Antoine Buchser
 */
 
 #ifndef MALLOC_H_
@@ -22,8 +22,8 @@ typedef int	t_bool;
 
 typedef struct	s_blk
 {
-  struct s_sgmt	*next;
-  struct s_sgmt	*prev;
+  struct s_blk	*next;
+  struct s_blk	*prev;
   void		*self;
   size_t	size;
   t_bool	free;
