@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 16:17:41 2015 Antoine Buchser
-** Last update Fri Jan 30 12:39:48 2015 Antoine Buchser
+** Last update Fri Jan 30 16:29:17 2015 Antoine Buchser
 */
 
 #include <stdio.h>
@@ -19,6 +19,22 @@ void	free(void* ptr)
   if (blk->self != ptr)
     return;
   blk->free = true;
-  printf("prev = %p\n", blk->prev);
-  printf("prev = %p\n", blk->);
+  if (g_current == blk)
+    g_current = blk->prev;
+  if (g_root == blk)
+    g_root = NULL;
+  if (blk->prev && blk->prev->free)
+    {
+      blk->prev->size = blk->size + BLK_SIZE;
+      blk->prev->next = blk->next;
+      if (blk->next)
+	blk->next->prev = blk->prev;
+    }
+  if (blk->next && blk->next->free)
+    {
+      blk->next->prev->size = blk->next->size + BLK_SIZE;
+      blk->next->prev->next = blk->next->next;
+      if (blk->next->next)
+	blk->next->next->prev = blk->next->prev;
+    }
 }

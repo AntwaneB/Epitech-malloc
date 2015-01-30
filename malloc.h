@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 12:50:51 2015 Antoine Buchser
-** Last update Thu Jan 29 16:23:27 2015 Antoine Buchser
+** Last update Fri Jan 30 16:14:49 2015 Antoine Buchser
 */
 
 #ifndef MALLOC_H_
@@ -30,11 +30,13 @@ typedef struct	s_blk
   char		data[1];
 }		t_blk;
 
-# define BLK_SIZE	sizeof(t_blk)
+# define BLK_SIZE	sizeof(struct s_blk)
 
 extern t_blk	*g_root;
 extern t_blk	*g_current;
 
-void	*malloc(size_t size);
+void	*malloc(size_t);
+void	free(void *);
+void	*realloc(void *, size_t);
 
 #endif /* !MALLOC_H_ */
