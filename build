@@ -1,0 +1,3 @@
+#!/bin/sh
+
+make -s && make clean -s && gcc -o test _Ressources/main.c && LD_PRELOAD=./libmy_malloc_.so ./test && rm ./test
