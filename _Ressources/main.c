@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 14:09:44 2015 Antoine Buchser
-** Last update Thu Jan 29 15:57:03 2015 Antoine Buchser
+** Last update Fri Jan 30 12:41:57 2015 Antoine Buchser
 */
 
 #include <stdlib.h>
@@ -22,22 +22,27 @@ int	main(void)
       return (0);
     }
 
-  write(1, "=== Start ===\n", strlen("=== Start ===\n"));
-  test[0] = 'l';
-  write(1, "0... ", strlen("0... "));
-  test[1] = 'o';
-  write(1, "1... ", strlen("1... "));
-  test[2] = 'l';
-  write(1, "2... ", strlen("2... "));
-  test[3] = '\n';
-  write(1, "3... ", strlen("3... "));
+  printf("Malloced test at : %p\n", test);
+  test[0] = 't';
+  test[1] = 'e';
+  test[2] = 's';
+  test[3] = 't';
   test[4] = '\0';
-  write(1, "4... ", strlen("4... "));
-  write(1, "\n=== End ===\n", strlen("\n=== End ===\n"));
+  printf("*test = %s\n", test);
 
-  write(1, test, 5);
+  free(test);
+  printf("Freed test\n", test);
 
-  while (1);
+  char	*lol = malloc(3);
+  printf("\nMalloced lol at : %p\n", lol);
+  lol[0] = 'l';
+  lol[1] = 'o';
+  lol[2] = 'l';
+  lol[3] = '\0';
+  printf("*lol = %s\n", lol);
+
+  free(lol);
+  printf("Freed lol\n", lol);
 
   return (0);
 }

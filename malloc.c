@@ -5,16 +5,20 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Tue Jan 27 15:23:33 2015 Antoine Buchser
-** Last update Thu Jan 29 15:59:22 2015 Antoine Buchser
+** Last update Fri Jan 30 12:19:43 2015 Antoine Buchser
 */
 
+#include <stdio.h>
 #include "malloc.h"
+
+t_blk	*g_root = NULL;
+t_blk	*g_current = NULL;
 
 static void	init_blk(t_blk *ptr, size_t size)
 {
   ptr->next = NULL;
   ptr->prev = g_current;
-  ptr->self = ptr;
+  ptr->self = ptr->data;
   ptr->size = size;
   ptr->free = false;
   if (g_current)

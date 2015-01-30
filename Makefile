@@ -5,7 +5,7 @@
 ## Login   <buchse_a@epitech.net>
 ## 
 ## Started on  Tue Jan 27 15:24:06 2015 Antoine Buchser
-## Last update Thu Jan 29 16:07:07 2015 Antoine Buchser
+## Last update Thu Jan 29 16:20:22 2015 Antoine Buchser
 ##
 
 CC	=	gcc
@@ -13,7 +13,9 @@ CFLAGS	+=	-fPIC -W -Wall -Wextra -Werror
 LDFLAGS	=	-shared
 RM	=	rm -f
 
-SRCS	=	malloc.c
+SRCS	=	malloc.c \
+		realloc.c \
+		free.c
 
 OBJS	=	$(SRCS:.c=.o)
 

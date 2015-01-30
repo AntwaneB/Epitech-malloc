@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 12:50:51 2015 Antoine Buchser
-** Last update Thu Jan 29 15:58:35 2015 Antoine Buchser
+** Last update Thu Jan 29 16:23:27 2015 Antoine Buchser
 */
 
 #ifndef MALLOC_H_
@@ -32,7 +32,9 @@ typedef struct	s_blk
 
 # define BLK_SIZE	sizeof(t_blk)
 
-t_blk	*g_root = NULL;
-t_blk	*g_current = NULL;
+extern t_blk	*g_root;
+extern t_blk	*g_current;
+
+void	*malloc(size_t size);
 
 #endif /* !MALLOC_H_ */
