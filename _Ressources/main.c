@@ -53,7 +53,7 @@ int	main(void)
   for (i = 0; i < 21; i++)
     big[i] = 'a' + i;
   big[i] = '\0';
-  printf("*big == [a-u] : ", big); try(strcmp(big, "abcdefghijklmnopqrstu") == 0, 1);
+  printf("*big == [a-u] : "); try(strcmp(big, "abcdefghijklmnopqrstu") == 0, 1);
   printf("big == test : "); try(big == test, 1);
 
   printf("\n");

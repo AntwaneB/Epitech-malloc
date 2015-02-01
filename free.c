@@ -19,10 +19,6 @@ void	free(void* ptr)
   if (blk->self != ptr)
     return;
   blk->free = true;
-  if (g_current == blk)
-    g_current = blk->prev;
-  if (g_root == blk)
-    g_root = NULL;
   if (blk->prev && blk->prev->free)
     {
       blk->prev->size = blk->size + BLK_SIZE;
@@ -36,5 +32,11 @@ void	free(void* ptr)
       blk->next->prev->next = blk->next->next;
       if (blk->next->next)
 	blk->next->next->prev = blk->next->prev;
+    }
+  if (g_current == blk)
+    {
+      g_root = g_current == g_root ? NULL : g_root;
+      g_current = blk->prev;
+      sbrk(-(blk->size + BLK_SIZE));
     }
 }
