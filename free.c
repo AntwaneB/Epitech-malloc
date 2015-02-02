@@ -51,7 +51,7 @@ void	free(void* ptr)
   if (!ptr)
     return;
   blk = ptr - (BLK_SIZE - 4);
-  if (blk->self != ptr)
+  if (blk->self != ptr || blk->free)
     return;
   blk->free = true;
   merge_next(blk);
