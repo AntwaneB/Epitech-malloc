@@ -11,35 +11,56 @@
 #include <stdio.h>
 #include "malloc.h"
 
+void	merge_prev(t_blk *blk)
+{
+  t_blk	*prev;
+
+  if (blk->prev && blk->prev->free)
+    {
+      prev = blk->prev;
+      prev->next = blk->next;
+      prev->size += blk->size + BLK_SIZE;
+      if (blk->next)
+	blk->next->prev = prev;
+      if (g_current == blk)
+	g_current = prev;
+    }
+}
+
+void	merge_next(t_blk *blk)
+{
+  t_blk	*next;
+
+  if (blk->next && blk->next->free)
+    {
+      next = blk->next;
+      blk->next = next->next;
+      blk->size += next->size + BLK_SIZE;
+      if (blk->next)
+	blk->next->prev = blk;
+      if (g_current == next)
+	g_current = blk;
+    }
+}
+
 void	free(void* ptr)
 {
   t_blk	*blk;
   t_blk	*tmp;
 
+  if (!ptr)
+    return;
   blk = ptr - (BLK_SIZE - 4);
   if (blk->self != ptr)
     return;
   blk->free = true;
-  if (blk->prev && blk->prev->free)
-    {
-      tmp = blk->prev;
-      tmp->size += blk->size + BLK_SIZE;
-      tmp->next = blk->next;
-      if (blk->next)
-	blk->next->prev = tmp;
-    }
-  if (blk->next && blk->next->free)
-    {
-      tmp = blk->next;
-      blk->next->prev->size += blk->next->size + BLK_SIZE;
-      blk->next->prev->next = blk->next->next;
-      if (tmp->next)
-	tmp->next->prev = tmp->prev;
-    }
-  if (g_current == blk)
+  merge_next(blk);
+  merge_prev(blk);
+  if (g_current->free)
     {
       g_root = g_current == g_root ? NULL : g_root;
-      g_current = blk->prev;
-      sbrk(-(blk->size + BLK_SIZE));
+      tmp = g_current;
+      g_current = g_current->prev;
+      sbrk(-(tmp->size + BLK_SIZE));
     }
 }

@@ -2,6 +2,8 @@
 
 if [ $# = 0 ]; then
     make -s && make clean -s && gcc -o test mouli/1.c && LD_PRELOAD=./libmy_malloc_.so ./test && rm ./test
+elif [ $1 = "m" ]; then
+    make -s && make clean -s && LD_PRELOAD=./libmy_malloc_.so ./moul_malloc_stud
 else
     make -s && make clean -s && gcc -o test mouli/$1.c && LD_PRELOAD=./libmy_malloc_.so ./test && rm ./test
 fi
