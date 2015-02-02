@@ -9,7 +9,7 @@
 ##
 
 CC	=	gcc
-CFLAGS	+=	-fPIC -W -Wall -Wextra -Werror
+CFLAGS	+=	-fPIC -W -Wall -Wextra -Werror -g
 LDFLAGS	=	-shared
 RM	=	rm -f
 

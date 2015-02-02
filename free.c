@@ -14,6 +14,7 @@
 void	free(void* ptr)
 {
   t_blk	*blk;
+  t_blk	*tmp;
 
   blk = ptr - (BLK_SIZE - 4);
   if (blk->self != ptr)
@@ -21,17 +22,19 @@ void	free(void* ptr)
   blk->free = true;
   if (blk->prev && blk->prev->free)
     {
-      blk->prev->size = blk->size + BLK_SIZE;
-      blk->prev->next = blk->next;
+      tmp = blk->prev;
+      tmp->size += blk->size + BLK_SIZE;
+      tmp->next = blk->next;
       if (blk->next)
-	blk->next->prev = blk->prev;
+	blk->next->prev = tmp;
     }
   if (blk->next && blk->next->free)
     {
-      blk->next->prev->size = blk->next->size + BLK_SIZE;
+      tmp = blk->next;
+      blk->next->prev->size += blk->next->size + BLK_SIZE;
       blk->next->prev->next = blk->next->next;
-      if (blk->next->next)
-	blk->next->next->prev = blk->next->prev;
+      if (tmp->next)
+	tmp->next->prev = tmp->prev;
     }
   if (g_current == blk)
     {
