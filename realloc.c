@@ -22,6 +22,8 @@ void	*realloc(void *ptr, size_t size)
   t_blk	*blk;
   void	*dest;
 
+  if (!ptr || size <= 0)
+    return (NULL);
   blk = ptr - (BLK_SIZE - 4);
   if (blk->self != ptr || blk->free)
     return (NULL);
