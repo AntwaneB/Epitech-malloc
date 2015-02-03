@@ -61,6 +61,7 @@ void	free(void* ptr)
       g_root = g_current == g_root ? NULL : g_root;
       tmp = g_current;
       g_current = g_current->prev;
+      g_current->next = NULL;
       sbrk(-(tmp->size + BLK_SIZE));
     }
 }
