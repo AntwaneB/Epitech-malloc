@@ -8,7 +8,6 @@
 ** Last update Fri Jan 30 16:29:48 2015 Antoine Buchser
 */
 
-#include <stdio.h>
 #include "malloc.h"
 
 t_blk	*g_root = NULL;

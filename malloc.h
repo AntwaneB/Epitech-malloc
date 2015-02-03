@@ -20,14 +20,14 @@ typedef int	t_bool;
 
 # define PAGING(s)	(s - 1) / 4 * 4 + 4
 
-typedef struct	s_blk
+typedef struct		s_blk
 {
-  struct s_blk	*next;
-  struct s_blk	*prev;
-  void		*self;
-  size_t	size;
-  t_bool	free;
-  char		data[1];
+  struct s_blk		*next;
+  struct s_blk		*prev;
+  void			*self;
+  size_t		size;
+  t_bool		free;
+  char			data[1];
 }		t_blk;
 
 # define BLK_SIZE	sizeof(struct s_blk)

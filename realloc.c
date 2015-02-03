@@ -9,7 +9,6 @@
 */
 
 #include <string.h>
-#include <stdio.h>
 #include "malloc.h"
 
 static void	copy_content(void *dest, t_blk *blk)

@@ -8,7 +8,6 @@
 ** Last update Fri Jan 30 16:29:17 2015 Antoine Buchser
 */
 
-#include <stdio.h>
 #include "malloc.h"
 
 void	merge_prev(t_blk *blk)
@@ -61,7 +60,8 @@ void	free(void* ptr)
       g_root = g_current == g_root ? NULL : g_root;
       tmp = g_current;
       g_current = g_current->prev;
-      g_current->next = NULL;
+      if (g_current)
+	g_current->next = NULL;
       sbrk(-(tmp->size + BLK_SIZE));
     }
 }
