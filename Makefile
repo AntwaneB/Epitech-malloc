@@ -8,29 +8,32 @@
 ## Last update Thu Jan 29 16:20:22 2015 Antoine Buchser
 ##
 
-CC	=	gcc
-CFLAGS	+=	-fPIC -W -Wall -Wextra -Werror -g
-LDFLAGS	=	-shared
-RM	=	rm -f
+CC		=	gcc
+CFLAGS		+=	-fPIC -W -Wall -Wextra -Werror -g
+LDFLAGS		=	-shared -fPIC
+RM		=	rm -f
 
-SRCS	=	malloc.c \
-		realloc.c \
-		free.c
+SRCS		=	malloc.c \
+			realloc.c \
+			free.c \
+			show_alloc_mem.c
 
-OBJS	=	$(SRCS:.c=.o)
+OBJS		=	$(SRCS:.c=.o)
 
-NAME	=	libmy_malloc_$(HOSTTYPE).so
+NAME		=	libmy_malloc_$(HOSTTYPE).so
 
-all:		$(NAME)
+all:			$(NAME)
 
-$(NAME):	$(OBJS)
-		$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
+$(NAME):		$(OBJS)
+			$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
+			ln -fs $(NAME) libmy_malloc.so
 
 clean:
-		$(RM) $(OBJS)
+			$(RM) $(OBJS)
 
-fclean:		clean
-		$(RM) $(NAME)
+fclean:			clean
+			$(RM) $(NAME)
+			$(RM) libmy_malloc.so
 
-re:		fclean all
+re:			fclean all
 

@@ -38,5 +38,6 @@ extern t_blk	*g_current;
 void	*malloc(size_t);
 void	free(void *);
 void	*realloc(void *, size_t);
+void	show_alloc_mem(void);
 
 #endif /* !MALLOC_H_ */

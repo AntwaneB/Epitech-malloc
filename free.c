@@ -8,6 +8,8 @@
 ** Last update Fri Jan 30 16:29:17 2015 Antoine Buchser
 */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "malloc.h"
 
 void	merge_prev(t_blk *blk)
@@ -42,6 +44,21 @@ void	merge_next(t_blk *blk)
     }
 }
 
+void	free_error(t_blk *blk, void *ptr)
+{
+  if (!blk && !ptr)
+    fprintf(stderr,
+	    "Free error: Stop doing n'importe quoi !\n");
+  else if (blk != ptr)
+    fprintf(stderr,
+	    "Free error: invalid pointer, " \
+	    "stop doing n'importe quoi !\n");
+  else if (blk->free)
+    fprintf(stderr, "Free error: double free error, " \
+	    "stop doing n'importe quoi !\n");
+  abort();
+}
+
 void	free(void* ptr)
 {
   t_blk	*blk;
@@ -49,9 +66,11 @@ void	free(void* ptr)
 
   if (!ptr)
     return;
+  if (!g_root)
+    free_error(NULL, NULL);
   blk = ptr - (BLK_SIZE - 4);
   if (blk->self != ptr || blk->free)
-    return;
+    free_error(blk, ptr);
   blk->free = true;
   merge_next(blk);
   merge_prev(blk);

@@ -1,9 +1,25 @@
 #!/bin/sh
 
 if [ $# = 0 ]; then
-    make -s && make clean -s && gcc -o test mouli/1.c && LD_PRELOAD=./libmy_malloc_.so ./test && rm ./test
+
+    make fclean -s \
+    && make -s && make clean -s \
+    && gcc -o test mouli/1.c ./libmy_malloc.so \
+    && LD_PRELOAD=./libmy_malloc.so ./test \
+    && rm ./test
+
 elif [ $1 = "m" ]; then
-    make -s && make clean -s && LD_PRELOAD=./libmy_malloc_.so ./moul_malloc_stud
+
+    make fclean -s \
+    && make -s && make clean -s \
+    && LD_PRELOAD=./libmy_malloc.so ./moul_malloc_stud
+
 else
-    make -s && make clean -s && gcc -o test mouli/$1.c && LD_PRELOAD=./libmy_malloc_.so ./test && rm ./test
+
+    make fclean -s \
+    && make -s && make clean -s \
+    && gcc -o test mouli/$1.c ./libmy_malloc.so \
+    && LD_PRELOAD=./libmy_malloc.so ./test \
+    && rm ./test
+
 fi

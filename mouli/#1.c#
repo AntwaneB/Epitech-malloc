@@ -9,8 +9,13 @@
 */
 
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h>f
 #include <string.h>
+
+void	show_alloc_mem(void)
+{
+  printf("vermot a tord\n");
+}
 
 void	try(int input, int wanted)
 {
