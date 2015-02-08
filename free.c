@@ -49,7 +49,7 @@ void	free_error(t_blk *blk, void *ptr)
   if (!blk && !ptr)
     fprintf(stderr,
 	    "Free error: Stop doing n'importe quoi !\n");
-  else if (blk != ptr)
+  else if (blk->self != ptr)
     fprintf(stderr,
 	    "Free error: invalid pointer, " \
 	    "stop doing n'importe quoi !\n");
@@ -71,7 +71,9 @@ void	free(void* ptr)
   blk = ptr - (BLK_SIZE - 4);
   if (blk->self != ptr || blk->free)
     free_error(blk, ptr);
-  blk->free = true;
+  if (TRACE)
+    my_alloc_stats(FREE, blk->size);
+  blk->free = TRUE;
   merge_next(blk);
   merge_prev(blk);
   if (g_current->free)

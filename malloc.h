@@ -13,10 +13,11 @@
 
 # include <unistd.h>
 
-# define false		0
-# define true		!false
+# define FALSE		0
+# define TRUE		!FALSE
 
-typedef int	t_bool;
+typedef int		t_bool;
+typedef unsigned int	uint;
 
 # define PAGING(s)	(s - 1) / 4 * 4 + 4
 
@@ -32,6 +33,11 @@ typedef struct		s_blk
 
 # define BLK_SIZE	sizeof(struct s_blk)
 
+# define FREE		-1
+# define ALLOC		1
+# define PRINT		0
+# define TRACE		1
+
 extern t_blk	*g_root;
 extern t_blk	*g_current;
 
@@ -39,5 +45,7 @@ void	*malloc(size_t);
 void	free(void *);
 void	*realloc(void *, size_t);
 void	show_alloc_mem(void);
+void	my_alloc_stats(int, size_t);
+void	show_alloc_stats(void);
 
 #endif /* !MALLOC_H_ */

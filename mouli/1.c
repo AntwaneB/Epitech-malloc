@@ -64,8 +64,11 @@ int	main(void)
   char	*newbig2 = realloc(newbig, 22);
   printf("newbig == newbig2 : "); try(newbig == newbig2, 1);
   printf("*newbig2 == [a-u] : "); try(strcmp(newbig2, "abcdefghijklmnopqrstu") == 0, 1);
+  free(newbig2);
 
   show_alloc_mem();
+
+  show_alloc_stats();
 
   return (0);
 }

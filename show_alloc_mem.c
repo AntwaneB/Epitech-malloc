@@ -24,9 +24,43 @@ void	show_alloc_mem(void)
 	{
 	  printf("0x%X - 0x%X : %u octets\n",
 		 (unsigned int)((long int)tmp),
-		 (unsigned int)((long int)(tmp + tmp->size)),
+		 (unsigned int)((long int)(tmp->data + tmp->size + 4)),
 		 (unsigned int)tmp->size);
 	}
       tmp = tmp->next;
     }
+}
+
+void		my_alloc_stats(int type, size_t size)
+{
+  static size_t	frees = 0;
+  static size_t allocs = 0;
+  static size_t	freed_size = 0;
+  static size_t	alloced_size = 0;
+
+  if (type == FREE)
+    {
+      frees++;
+      freed_size += size;
+    }
+  else if (type == ALLOC)
+    {
+      allocs++;
+      alloced_size += size;
+    }
+  else
+    {
+      fprintf(stderr,
+	      "\nHEAP SUMMARY:\n" \
+	      "  total heap usage: %u allocs, %u frees, %u " \
+	      "bytes allocated\n" \
+	      "     unfreed bytes: %u bytes in %u blocks\n",
+	      (uint)allocs, (uint)frees, (uint)alloced_size,
+	      (uint)(alloced_size - freed_size), (uint)(allocs - frees));
+    }
+}
+
+void	show_alloc_stats(void)
+{
+  my_alloc_stats(PRINT, 0);
 }

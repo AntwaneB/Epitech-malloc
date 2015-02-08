@@ -19,11 +19,36 @@ static void	init_blk(t_blk *ptr, size_t size)
   ptr->prev = g_current;
   ptr->self = ptr->data;
   ptr->size = size;
-  ptr->free = false;
+  ptr->free = FALSE;
   if (g_current)
     g_current->next = ptr;
   g_current = ptr;
 }
+
+/*
+** static t_blk	*split_block(t_blk *tmp, size_t size)
+** {
+**  t_blk		*newblk;
+**
+**  if (tmp->size - (size + BLK_SIZE) >= 4)
+**    {
+**      newblk = (t_blk *)(tmp->data + size + 4);
+**      newblk->prev = tmp;
+**      newblk->next = tmp->next;
+**      newblk->size = tmp->size - (size + BLK_SIZE);
+**      newblk->free = true;
+**      newblk->self = newblk->data;
+**      if (tmp->next)
+**	tmp->next->prev = newblk;
+**      tmp->next = newblk;
+**      tmp->size = size;
+**      if (g_current == tmp)
+**	g_current = newblk;
+**    }
+**  (void)size;
+**  return (tmp);
+** }
+*/
 
 static void	*get_blk_addr(size_t size)
 {
@@ -37,7 +62,7 @@ static void	*get_blk_addr(size_t size)
       if (tmp->size >= size && tmp->free)
 	{
 	  ptr = tmp;
-	  ptr->free = false;
+	  ptr->free = FALSE;
 	}
       tmp = tmp->next;
     }
@@ -57,7 +82,10 @@ void	*malloc(size_t size)
 {
   t_blk	*ptr;
 
+  size = (size <= 0) ? 4 : size;
   size = PAGING(size);
   ptr = get_blk_addr(size);
+  if (TRACE)
+    my_alloc_stats(ALLOC, size);
   return (ptr->data);
 }
