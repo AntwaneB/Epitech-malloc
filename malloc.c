@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Tue Jan 27 15:23:33 2015 Antoine Buchser
-** Last update Fri Jan 30 16:29:48 2015 Antoine Buchser
+** Last update Mon Feb  9 18:51:14 2015 Hugo SCHOCH
 */
 
 #include "malloc.h"
@@ -60,18 +60,18 @@ static void	*get_blk_addr(size_t size)
   while (!ptr && tmp)
     {
       if (tmp->size >= size && tmp->free)
-	{
-	  ptr = tmp;
-	  ptr->free = FALSE;
-	}
+        {
+          ptr = tmp;
+          ptr->free = FALSE;
+        }
       tmp = tmp->next;
     }
   if (!ptr)
     {
       if ((ptr = sbrk(BLK_SIZE + size)) == (void *)-1)
-	return (NULL);
+        return (NULL);
       else
-	init_blk(ptr, size);
+        init_blk(ptr, size);
     }
   if (!g_root)
     g_root = ptr;
