@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Tue Jan 27 15:23:33 2015 Antoine Buchser
-** Last update Mon Feb  9 18:52:46 2015 Hugo SCHOCH
+** Last update Mon Feb  9 18:55:27 2015 Antoine Buchser
 */
 
 #include <stdio.h>
@@ -21,12 +21,12 @@ void	show_alloc_mem(void)
   while (tmp)
     {
       if (!(tmp->free))
-        {
+	{
           printf("0x%X - 0x%X : %u octets\n",
                  (unsigned int)((long int)tmp),
                  (unsigned int)((long int)(tmp->data + tmp->size + 4)),
                  (unsigned int)tmp->size);
-        }
+	}
       tmp = tmp->next;
     }
 }

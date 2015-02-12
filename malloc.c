@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Tue Jan 27 15:23:33 2015 Antoine Buchser
-** Last update Mon Feb  9 18:51:14 2015 Hugo SCHOCH
+** Last update Thu Feb 12 13:45:46 2015 Antoine Buchser
 */
 
 #include "malloc.h"
@@ -25,30 +25,27 @@ static void	init_blk(t_blk *ptr, size_t size)
   g_current = ptr;
 }
 
-/*
-** static t_blk	*split_block(t_blk *tmp, size_t size)
-** {
-**  t_blk		*newblk;
-**
-**  if (tmp->size - (size + BLK_SIZE) >= 4)
-**    {
-**      newblk = (t_blk *)(tmp->data + size + 4);
-**      newblk->prev = tmp;
-**      newblk->next = tmp->next;
-**      newblk->size = tmp->size - (size + BLK_SIZE);
-**      newblk->free = true;
-**      newblk->self = newblk->data;
-**      if (tmp->next)
-**	tmp->next->prev = newblk;
-**      tmp->next = newblk;
-**      tmp->size = size;
-**      if (g_current == tmp)
-**	g_current = newblk;
-**    }
-**  (void)size;
-**  return (tmp);
-** }
-*/
+static t_blk	*split_block(t_blk *tmp, size_t size)
+{
+  t_blk		*newblk;
+
+  if ((int)(tmp->size - (size + BLK_SIZE)) >= 4)
+    {
+      newblk = (t_blk *)(tmp->data + size + 4);
+      newblk->prev = tmp;
+      newblk->next = tmp->next;
+      newblk->size = tmp->size - (size + BLK_SIZE);
+      newblk->free = TRUE;
+      newblk->self = newblk->data;
+      if (tmp->next)
+	tmp->next->prev = newblk;
+      tmp->next = newblk;
+      tmp->size = size;
+      if (g_current == tmp)
+	g_current = newblk;
+    }
+  return (tmp);
+}
 
 static void	*get_blk_addr(size_t size)
 {
@@ -61,7 +58,7 @@ static void	*get_blk_addr(size_t size)
     {
       if (tmp->size >= size && tmp->free)
         {
-          ptr = tmp;
+	  ptr = split_block(tmp, size);
           ptr->free = FALSE;
         }
       tmp = tmp->next;

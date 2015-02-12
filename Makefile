@@ -5,7 +5,7 @@
 ## Login   <buchse_a@epitech.net>
 ## 
 ## Started on  Tue Jan 27 15:24:06 2015 Antoine Buchser
-## Last update Thu Jan 29 16:20:22 2015 Antoine Buchser
+## Last update Wed Feb 11 19:10:23 2015 Antoine Buchser
 ##
 
 CC		=	gcc
@@ -16,6 +16,7 @@ RM		=	rm -f
 SRCS		=	malloc.c \
 			realloc.c \
 			free.c \
+			calloc.c \
 			show_alloc_mem.c
 
 OBJS		=	$(SRCS:.c=.o)

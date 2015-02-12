@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 12:50:51 2015 Antoine Buchser
-** Last update Fri Jan 30 16:14:49 2015 Antoine Buchser
+** Last update Tue Feb 10 16:33:43 2015 Antoine Buchser
 */
 
 #ifndef MALLOC_H_
@@ -44,6 +44,7 @@ extern t_blk	*g_current;
 void	*malloc(size_t);
 void	free(void *);
 void	*realloc(void *, size_t);
+void	*calloc(size_t, size_t);
 void	show_alloc_mem(void);
 void	my_alloc_stats(int, size_t);
 void	show_alloc_stats(void);
