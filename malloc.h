@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 12:50:51 2015 Antoine Buchser
-** Last update Tue Feb 10 16:33:43 2015 Antoine Buchser
+** Last update Thu Feb 12 17:22:21 2015 Antoine Buchser
 */
 
 #ifndef MALLOC_H_
@@ -19,16 +19,14 @@
 typedef int		t_bool;
 typedef unsigned int	uint;
 
-# define PAGING(s)	(s - 1) / 4 * 4 + 4
+# define PAGING(s)	(s - 1) / 8 * 8 + 8
 
 typedef struct		s_blk
 {
   struct s_blk		*next;
   struct s_blk		*prev;
-  void			*self;
   size_t		size;
   t_bool		free;
-  char			data[1];
 }		t_blk;
 
 # define BLK_SIZE	sizeof(struct s_blk)
@@ -40,6 +38,7 @@ typedef struct		s_blk
 
 extern t_blk	*g_root;
 extern t_blk	*g_current;
+extern size_t	g_pagesize;
 
 void	*malloc(size_t);
 void	free(void *);

@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 16:17:41 2015 Antoine Buchser
-** Last update Mon Feb  9 18:50:49 2015 Hugo SCHOCH
+** Last update Thu Feb 12 17:15:56 2015 Antoine Buchser
 */
 
 #include <stdio.h>
@@ -49,10 +49,6 @@ void	free_error(t_blk *blk, void *ptr)
   if (!blk && !ptr)
     fprintf(stderr,
 	    "Free error: Stop doing n'importe quoi !\n");
-  else if (blk->self != ptr)
-    fprintf(stderr,
-	    "Free error: invalid pointer, " \
-	    "stop doing n'importe quoi !\n");
   else if (blk->free)
     fprintf(stderr, "Free error: double free error, " \
 	    "stop doing n'importe quoi !\n");
@@ -68,8 +64,8 @@ void	free(void* ptr)
     return;
   if (!g_root)
     free_error(NULL, NULL);
-  blk = ptr - (BLK_SIZE - 4);
-  if (blk->self != ptr || blk->free)
+  blk = (t_blk*)((char*)ptr - BLK_SIZE);
+  if (blk->free)
     free_error(blk, ptr);
   if (TRACE)
     my_alloc_stats(FREE, blk->size);

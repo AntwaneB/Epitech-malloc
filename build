@@ -12,7 +12,7 @@ elif [ $1 = "m" ]; then
 
     make fclean -s \
     && make -s && make clean -s \
-    && LD_PRELOAD=./libmy_malloc.so ./moul_malloc_stud
+    && echo 'n' | LD_PRELOAD=./libmy_malloc.so ./moul_malloc_stud
 
 else
 

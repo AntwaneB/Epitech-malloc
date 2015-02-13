@@ -5,7 +5,7 @@
 ** Login   <buchse_a@epitech.net>
 ** 
 ** Started on  Thu Jan 29 16:18:25 2015 Antoine Buchser
-** Last update Fri Jan 30 16:31:00 2015 Antoine Buchser
+** Last update Thu Feb 12 13:56:11 2015 Antoine Buchser
 */
 
 #include <string.h>
@@ -13,7 +13,7 @@
 
 static void	copy_content(void *dest, t_blk *blk)
 {
-  memcpy(dest, blk->self, blk->size);
+  memcpy(dest, (char*)blk + BLK_SIZE, blk->size);
 }
 
 void	*realloc(void *ptr, size_t size)
@@ -28,8 +28,8 @@ void	*realloc(void *ptr, size_t size)
       free(ptr);
       return (NULL);
     }
-  blk = ptr - (BLK_SIZE - 4);
-  if (blk->self != ptr || blk->free)
+  blk = (t_blk*)((char*)ptr - BLK_SIZE);
+  if (blk->free)
     return (NULL);
   if (blk->size >= PAGING(size))
     return (ptr);
